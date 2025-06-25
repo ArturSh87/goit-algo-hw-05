@@ -2,6 +2,7 @@ from decorators import input_error
 
 # Парсер команд
 def parse_input(user_input):
+    
     cmd, *args = user_input.split()
     cmd = cmd.strip().lower()
     return cmd, *args
@@ -53,8 +54,12 @@ def main():
     print("Welcome to the assistant bot!")
     while True:
         user_input = input("Enter a command: ").strip().lower()
+        if not user_input:                      # Додав обробку пустого рядку  
+            print("Please enter a command")
+            continue
         command, *args = parse_input(user_input)
         
+       
         if command in ["close", "exit"]:
             print("Good bye!")
             break
@@ -69,6 +74,8 @@ def main():
             print(show_phone(args, contacts))
         elif command == "all":
             print(show_all(contacts))
+        elif command == " ":
+            print("Enter command")
         else:
             print("Invalid command.")   
     
